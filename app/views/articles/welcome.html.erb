@@ -1,4 +1,4 @@
-<section class="hero is-small is-dark">
+<section class="hero is-dark">
   <div class="hero-body">
     <p class="title px-6">
       <%= @articles[0]['pages'][0]['displaytitle'] %>
@@ -12,18 +12,32 @@
 <section class="section">
     <div class="container mx-6 px-6">
       <div class="columns">
-        <% if @articles[0]['pages'][0]['originalimage'] %>
-            <div class="column is-3 has-text-centered">
-                <%= image_tag @articles[0]['pages'][0]['originalimage']['source'], style: "max-height:200px; max-width:200px;" %><br>
-                <p class="is-size-7 has-text-centered is-italic"> <%= @articles[0]['pages'][0]['description'] %> </p>
-            </div>
-        <% end %>
+        <div class="column has-text-centered is-3">
+          <% @articles[0]['pages'].each do | body | %>
+            <% if body['originalimage'] %>
+              <%= image_tag body['originalimage']['source'], style: "width:200px;" %> <br>
+              <p class="is-size-7  is-italic"> <%= body['description'] %> </p>
+            <%end %>
+          <% end %>
+        </div>
         <div class="column">
             <% @articles[0]['pages'].each do | body | %>
                 <%= body['extract_html'].html_safe %><br>
             <% end %>
         </div>
       </div>
+        <nav class="pagination is-right" role="navigation" aria-label="pagination">
+        <a class="pagination-previous">Previous</a>
+        <a class="pagination-next">Next page</a>
+        <ul class="pagination-list">
+            <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 2">2</a></li>
+            <li><a class="pagination-link is-current" aria-label="Page 3" aria-current="page">3</a></li>
+            <li><a class="pagination-link" aria-label="Goto page 4">4</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 10">10</a></li>
+        </ul>
+        </nav>
     </div>
   </section>
-
