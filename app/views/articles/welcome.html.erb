@@ -1,13 +1,24 @@
-<h1>Today in History</h1>
-
-<h1><%= @articles[0]['pages'][0]['displaytitle'] %></h1><br>
-<h3><%= @articles[0]['text'] %></h3><br>
-
-<% if @articles[0]['pages'][0]['originalimage'] %>
-    <%= image_tag @articles[0]['pages'][0]['originalimage']['source'], style: "max-height:200px; max-width:200px;" %>
-<% end %>
-
-<% @articles[0]['pages'].each do | body | %>
-    <%= body['extract_html'].html_safe%>
-<% end %>
+<section class="section">
+    <div class="container">
+      <h1 class="title">
+        Today in History
+      </h1><br>
+      <p class="subtitle">
+        <%= @articles[0]['pages'][0]['displaytitle'] %>
+      </p>
+      <h3><%= @articles[0]['text'] %></h3><br>
+      <div class="columns">
+        <% if @articles[0]['pages'][0]['originalimage'] %>
+            <div class="column is-3">
+                <%= image_tag @articles[0]['pages'][0]['originalimage']['source'], style: "max-height:200px; max-width:200px;" %>
+            </div>
+        <% end %>
+        <div class="column">
+            <% @articles[0]['pages'].each do | body | %>
+                <%= body['extract_html'].html_safe%>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
 
