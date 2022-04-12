@@ -1,0 +1,9 @@
+<h1>Articles#welcome</h1>
+
+<h1><%= @articles[0]['pages'][0]['displaytitle'] %></h1><br>
+<h3><%= @articles[0]['text'] %></h3><br>
+<%= image_tag @articles[0]['pages'][0]['originalimage']['source'], style: "max-height:300px; max-width:300px;" %>
+<% @articles[0]['pages'].each do | body | %>
+    <%= body['extract_html'].html_safe%>
+<% end %>
+
