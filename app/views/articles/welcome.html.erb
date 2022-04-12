@@ -15,7 +15,7 @@
         <div class="column has-text-centered is-3">
           <% @articles[0]['pages'].each do | body | %>
             <% if body['originalimage'] %>
-              <%= image_tag body['originalimage']['source'], style: "width:200px;" %> <br>
+              <%= image_tag body['originalimage']['source'], style: "width:250px;" %> <br>
               <p class="is-size-7  is-italic"> <%= body['description'] %> </p>
             <%end %>
           <% end %>
