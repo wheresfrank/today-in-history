@@ -40,7 +40,7 @@
       <% end %>
     </div>
     <div class="column is-one-quarter">
-      <p class="subtitle">Jump to deseased</p>
+      <p class="subtitle">Jump to deceased</p>
       <% @deaths.each do | death |%>
         <a href="#<%= death['pages'][0]['wikibase_item'] %>"><%= death['pages'][0]['displaytitle'].html_safe%></a><br>
       <% end %>

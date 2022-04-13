@@ -1,0 +1,49 @@
+<section class="hero is-small is-dark">
+  <div class="hero-body">
+    <p class="title px-6">
+      <% if Date.today.day == 1%>
+        Holidays of the <%= Date.today.strftime("%dst of %B") %>
+      <% elsif Date.today.day == 2%>
+        Holidays of the <%= Date.today.strftime("%dnd of %B") %>
+      <% elsif Date.today.day == 3%>
+        Holidays of the <%= Date.today.strftime("%drd of %B") %>
+      <% else %>
+        Holidays of the <%= Date.today.strftime("%dth of %B") %>
+      <% end %>
+    </p>
+    <p class="subtitle px-6 has-text-justified">
+    </p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="columns">
+    <div class="column">
+      <% @holidays.each do | holiday |%>
+        <div class="container">
+          <a class="subtitle has-text-weight-semibold" id="<%=holiday['pages'][0]['wikibase_item']%>"><%= holiday['pages'][0]['displaytitle'].html_safe%></a>
+          <div class="columns mt-3">
+              <% if holiday['pages'][0]['thumbnail']%>
+                <div class="column is-3 has-text-centered">
+                  <%= image_tag holiday['pages'][0]['thumbnail']['source']%><br>
+                  <p class="is-size-7 has-text-italic"><%= holiday['pages'][0]['description'] %></p>
+                </div>
+              <% end %>
+            <div class="column">
+              <p><%= holiday['text'].html_safe %></p><br>
+              <p><%= holiday['pages'][0]['extract_html'].html_safe%></p><br>
+              <a href="<%= holiday['pages'][0]['content_urls']['desktop']['page']%>" target="_blank">Read more here</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+    <div class="column is-one-quarter">
+      <p class="subtitle">Jump to holiday</p>
+      <% @holidays.each do | holiday |%>
+        <a href="#<%= holiday['pages'][0]['wikibase_item'] %>"><%= holiday['pages'][0]['displaytitle'].html_safe%></a><br>
+      <% end %>
+    </div>
+  </div>
+</div>
