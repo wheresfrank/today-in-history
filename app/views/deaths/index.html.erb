@@ -1,0 +1,49 @@
+<section class="hero is-small is-dark">
+  <div class="hero-body">
+    <p class="title px-6">
+      <% if Date.today.day == 1%>
+        People that died on the <%= Date.today.strftime("%dst of %B") %> 
+      <% elsif Date.today.day == 2%>
+        People that died on the <%= Date.today.strftime("%dnd of %B") %>
+      <% elsif Date.today.day == 3%>
+        People that died on the <%= Date.today.strftime("%drd of %B") %>
+      <% else %>
+        People that died on the <%= Date.today.strftime("%dth of %B") %>
+      <% end %>
+    </p>
+    <p class="subtitle px-6 has-text-justified">
+    </p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="columns">
+    <div class="column">
+      <% @deaths.each do | death |%>
+        <div class="container">
+          <a class="subtitle has-text-weight-semibold" id="<%=death['pages'][0]['wikibase_item']%>"><%= death['pages'][0]['displaytitle'].html_safe%></a>
+          <div class="columns mt-3">
+              <% if death['pages'][0]['thumbnail']%>
+                <div class="column is-3 has-text-centered">
+                  <%= image_tag death['pages'][0]['thumbnail']['source']%><br>
+                  <p class="is-size-7 has-text-italic"><%= death['pages'][0]['description'] %></p>
+                </div>
+              <% end %>
+            <div class="column">
+              <p><%= death['text'].html_safe %></p><br>
+              <p><%= death['pages'][0]['extract_html'].html_safe%></p><br>
+              <a href="<%= death['pages'][0]['content_urls']['desktop']['page']%>" target="_blank">Read more here</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+    <div class="column is-one-quarter">
+      <p class="subtitle">Jump to deseased</p>
+      <% @deaths.each do | death |%>
+        <a href="#<%= death['pages'][0]['wikibase_item'] %>"><%= death['pages'][0]['displaytitle'].html_safe%></a><br>
+      <% end %>
+    </div>
+  </div>
+</div>
