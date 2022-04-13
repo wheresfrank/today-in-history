@@ -21,7 +21,8 @@
     <div class="column">
       <% @births.each do | birth |%>
         <div class="container">
-          <a class="subtitle has-text-weight-semibold" id="<%=birth['pages'][0]['wikibase_item']%>"><%= birth['pages'][0]['displaytitle'].html_safe%></a>
+          <a class="subtitle has-text-weight-semibold" id="<%=birth['pages'][0]['wikibase_item']%>"><%= birth['pages'][0]['displaytitle'].html_safe%>
+           - <%= Date.today.year - birth['year']%> years old</a>
           <div class="columns mt-3">
               <% if birth['pages'][0]['thumbnail']%>
                 <div class="column is-3 has-text-centered">
