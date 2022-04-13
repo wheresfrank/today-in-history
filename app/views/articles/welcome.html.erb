@@ -1,31 +1,49 @@
-<section class="hero is-dark">
+<section class="hero is-small is-dark">
   <div class="hero-body">
     <p class="title px-6">
-      <%= @articles[@item]['pages'][0]['displaytitle'].html_safe %>
+      <% if Date.today.day == 1%>
+        <%= Date.today.strftime("%dst of %B") %> in History
+      <% elsif Date.today.day == 2%>
+        <%= Date.today.strftime("%dnd of %B") %> in History
+      <% elsif Date.today.day == 3%>
+        <%= Date.today.strftime("%drd of %B") %> in History
+      <% else %>
+        <%= Date.today.strftime("%dth of %B") %> in History
+      <% end %>
     </p>
     <p class="subtitle px-6 has-text-justified">
-      <%= @articles[@item]['text'].html_safe %>
     </p>
   </div>
 </section>
 
-<section class="section">
-    <div class="container mx-6 px-6">
-      <div class="columns">
-        <div class="column has-text-centered is-3">
-          <% @articles[@item]['pages'].each do | body | %>
-            <% if body['originalimage'] %>
-              <%= image_tag body['originalimage']['source'], style: "width:250px;" %> <br>
-              <p class="is-size-7  is-italic"> <%= body['description'] %> </p>
-            <%end %>
-          <% end %>
+<div class="section">
+  <div class="columns">
+    <div class="column">
+      <% @articles.each do | article |%>
+        <div class="container">
+          <a class="subtitle has-text-weight-semibold" id="<%=article['pages'][0]['wikibase_item']%>"><%= article['pages'][0]['displaytitle'].html_safe%></a>
+          <div class="columns mt-3">
+              <% if article['pages'][0]['thumbnail']%>
+                <div class="column is-3 has-text-centered">
+                  <%= image_tag article['pages'][0]['thumbnail']['source']%><br>
+                  <p class="is-size-7 has-text-italic"><%= article['pages'][0]['description'] %></p>
+                </div>
+              <% end %>
+            <div class="column">
+              <p><%= article['text'].html_safe %></p><br>
+              <p><%= article['pages'][0]['extract_html'].html_safe%></p><br>
+              <a href="<%= article['pages'][0]['content_urls']['desktop']['page']%>" target="_blank">Read more here</a>
+            </div>
+          </div>
         </div>
-        <div class="column">
-            <% @articles[@item]['pages'].each do | body | %>
-                <%= body['extract_html'].html_safe %><br>
-            <% end %>
-        </div>
-      </div>
-        <%= link_to "Load next random event from today's date in history", "/", class: "button is-medium is-fullwidth" %>
+        <hr>
+      <% end %>
     </div>
-  </section> 
+    <div class="column is-one-quarter">
+      <p class="subtitle">Jump to event</p>
+      <% @articles.each do | article |%>
+        <a href="#<%= article['pages'][0]['wikibase_item'] %>"><%= article['pages'][0]['displaytitle'].html_safe%></a><br>
+      <% end %>
+    </div>
+  </div>
+</div>
