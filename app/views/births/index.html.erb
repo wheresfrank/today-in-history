@@ -1,15 +1,7 @@
 <section class="hero is-small is-dark">
   <div class="hero-body">
     <p class="title px-6">
-      <% if Date.today.day == 1%>
-        People born on the <%= Date.today.strftime("%dst of %B") %> 
-      <% elsif Date.today.day == 2%>
-        People born on the <%= Date.today.strftime("%dnd of %B") %>
-      <% elsif Date.today.day == 3%>
-        People born on the <%= Date.today.strftime("%drd of %B") %>
-      <% else %>
-        People born on the <%= Date.today.strftime("%dth of %B") %>
-      <% end %>
+      People born on the <%= Date.today.day.ordinalize %> of <%= Date.today.strftime("%B") %>
     </p>
     <p class="subtitle px-6 has-text-justified">
     </p>

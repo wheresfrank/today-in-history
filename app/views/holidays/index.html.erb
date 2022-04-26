@@ -1,15 +1,7 @@
 <section class="hero is-small is-dark">
   <div class="hero-body">
     <p class="title px-6">
-      <% if Date.today.day == 1%>
-        Holidays of the <%= Date.today.strftime("%dst of %B") %>
-      <% elsif Date.today.day == 2%>
-        Holidays of the <%= Date.today.strftime("%dnd of %B") %>
-      <% elsif Date.today.day == 3%>
-        Holidays of the <%= Date.today.strftime("%drd of %B") %>
-      <% else %>
-        Holidays of the <%= Date.today.strftime("%dth of %B") %>
-      <% end %>
+      Holidays of the <%= Date.today.day.ordinalize %> of <%= Date.today.strftime("%B") %>
     </p>
     <p class="subtitle px-6 has-text-justified">
     </p>
