@@ -12,23 +12,25 @@
   <div class="columns">
     <div class="column">
       <% @articles.each do | article |%>
-        <div class="container">
-          <a class="subtitle has-text-weight-semibold" id="<%=article['pages'][0]['wikibase_item']%>"><%= article['pages'][0]['displaytitle'].html_safe%></a>
-          <div class="columns mt-3">
-              <% if article['pages'][0]['thumbnail']%>
-                <div class="column is-3 has-text-centered">
-                  <%= image_tag article['pages'][0]['thumbnail']['source']%><br>
-                  <p class="is-size-7 has-text-italic"><%= article['pages'][0]['description'] %></p>
-                </div>
-              <% end %>
-            <div class="column">
-              <p><%= article['text'].html_safe %></p><br>
-              <p><%= article['pages'][0]['extract_html'].html_safe%></p><br>
-              <a href="<%= article['pages'][0]['content_urls']['desktop']['page']%>" target="_blank">Read more here</a>
+        <% if article['pages'].present? %>
+          <div class="container">
+            <a class="subtitle has-text-weight-semibold" id="<%=article['pages'][0]['wikibase_item']%>"><%= article['pages'][0]['displaytitle'].html_safe%></a>
+            <div class="columns mt-3">
+                <% if article['pages'][0]['thumbnail']%>
+                  <div class="column is-3 has-text-centered">
+                    <%= image_tag article['pages'][0]['thumbnail']['source']%><br>
+                    <p class="is-size-7 has-text-italic"><%= article['pages'][0]['description'] %></p>
+                  </div>
+                <% end %>
+              <div class="column">
+                <p><%= article['text'].html_safe %></p><br>
+                <p><%= article['pages'][0]['extract_html'].html_safe%></p><br>
+                <a href="<%= article['pages'][0]['content_urls']['desktop']['page']%>" target="_blank">Read more here</a>
+              </div>
             </div>
           </div>
-        </div>
-        <hr>
+          <hr>
+        <% end %>
       <% end %>
     </div>
     <div class="column is-one-quarter">
